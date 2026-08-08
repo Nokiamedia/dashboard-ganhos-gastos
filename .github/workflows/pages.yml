@@ -1,25 +1,26 @@
-name: Pages debug
+name: Deploy to GitHub Pages (gh-pages)
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write  # necessário para o push para gh-pages via GITHUB_TOKEN
 
 jobs:
-  debug:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Print environment
-        run: |
-          echo "Event: $GITHUB_EVENT_NAME"
-          echo "Ref: $GITHUB_REF"
-          echo "Commit: $GITHUB_SHA"
-          echo "Files in repo root:"
-          ls -la
-          echo "Listing css and js:"
-          ls -la css || true
-          ls -la js || true
-      - name: Print GH permissions
-        run: |
-          echo "RUNNER_OS=$RUNNER_OS"
-          # show effective permissions (not fully possible), but helps debug
-          env | grep GITHUB
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Se tiveres um build (ex: npm run build), adiciona-o aqui.
+      # Para este repo estático, publicamos o root.
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages        # branch alvo
+          folder: '.'             # pasta a publicar (ajusta se tiveres build output)
+          clean: true
+          token: ${{ secrets.GITHUB_TOKEN }}
