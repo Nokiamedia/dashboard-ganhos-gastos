@@ -1,33 +1,27 @@
-# Ganhos & Gastos — Dashboard Financeiro
+# Dashboard Ganhos e Gastos
 
-Um dashboard pessoal, num único ficheiro HTML, para visualizar receitas e despesas a partir de um extrato em `.csv` ou `.xlsx`. Sem servidor, sem conta, sem instalação — os dados são lidos e processados inteiramente no navegador.
+Este repositório é um dashboard simples para registar e visualizar ganhos e gastos. Este commit inicial adiciona um scaffold mínimo para permitir testes locais e deploy rápido via GitHub Pages.
 
-## Como usar
+Conteúdo adicionado:
+- index.html — página principal do dashboard
+- css/styles.css — estilos básicos
+- js/app.js — lógica mínima para demonstração
+- README.md — instruções básicas
+- LICENSE — licença Apache-2.0 (referência)
+- .gitignore — ficheiros a ignorar
+- .github/workflows/pages.yml — workflow para deploy para GitHub Pages (on push)
 
-1. Abra `index.html` num navegador (duplo clique no ficheiro) ou publique com o GitHub Pages.
-2. Clique em **Carregar ficheiro** e escolha o seu extrato em `.csv` ou `.xlsx` (também pode arrastar o ficheiro para a página).
-3. Explore o saldo, os gráficos por categoria e por mês, e a tabela de movimentos — com pesquisa, filtros e ordenação por coluna.
+Como usar localmente
+1. Fazer clone: git clone https://github.com/Nokiamedia/dashboard-ganhos-gastos.git
+2. Abrir `index.html` no browser (é um site estático). Alternativamente usar um servidor local simples: `python -m http.server` e abrir http://localhost:8000
 
-Sem dados à mão? **Ver com dados de exemplo** mostra o dashboard com valores fictícios. **Transferir modelo** dá-lhe um `.csv` de partida com o formato certo.
+Deploy
+- O workflow do GitHub Actions faz upload dos ficheiros para GitHub Pages após cada push para a branch `main`.
 
-## Formato esperado do ficheiro
+Próximos passos recomendados
+- Substituir os dados de exemplo por dados reais ou integrar com backend.
+- Adicionar testes, validação e linter conforme necessário.
+- Verificar se a Pages está corretamente configurada (Settings → Pages) e que a Action tem permissões.
 
-| Data       | Descrição      | Categoria  | Tipo    | Valor  |
-|------------|-----------------|------------|---------|--------|
-| 2026-08-01 | Salário Agosto  | Salário    | Receita | 2200   |
-| 2026-08-02 | Renda           | Habitação  | Despesa | 750    |
-
-- **Data** — `AAAA-MM-DD` ou `DD/MM/AAAA`
-- **Tipo** — `Receita` ou `Despesa` (também aceita `Entrada`/`Saída`)
-- **Valor** — sempre positivo; o sinal vem da coluna Tipo
-- **Categoria** — texto livre; categorias como Salário, Alimentação, Transporte, Habitação, Saúde, Lazer, Compras, Contas & Serviços e Educação têm cores próprias nos gráficos, outras usam uma cor neutra
-
-Ver `sample-data.csv` neste repositório para um exemplo completo.
-
-## Publicar com GitHub Pages
-
-Em `Settings → Pages` do repositório, escolha a branch `main` e a pasta `/ (root)` como origem. O site fica disponível em `https://<utilizador>.github.io/<repositório>/`.
-
-## Privacidade
-
-Nenhum dado sai do seu navegador — não há backend, não há armazenamento externo, e o ficheiro carregado nunca é enviado para lado nenhum.
+Contacto
+- Se precisares de alterações rápidas, diz o que queres adicionar e eu faço.
