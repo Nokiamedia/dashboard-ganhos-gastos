@@ -1,7 +1,0 @@
-# Ignored files
-node_modules/
-.env
-.DS_Store
-
-# build artifacts
-/dist
