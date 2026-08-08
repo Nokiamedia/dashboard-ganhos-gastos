@@ -1,34 +1,25 @@
-name: Deploy to GitHub Pages
+name: Pages debug
 
 on:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  workflow_dispatch:
 
 jobs:
-  prepare:
+  debug:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # Garante que Pages está configurado corretamente
-      - name: Configure Pages
-        uses: actions/configure-pages@v3
-
-      # Upload do conteúdo a publicar (ajusta `path` se usares um build output)
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: '.'
-
-  deploy:
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+      - name: Print environment
+        run: |
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Ref: $GITHUB_REF"
+          echo "Commit: $GITHUB_SHA"
+          echo "Files in repo root:"
+          ls -la
+          echo "Listing css and js:"
+          ls -la css || true
+          ls -la js || true
+      - name: Print GH permissions
+        run: |
+          echo "RUNNER_OS=$RUNNER_OS"
+          # show effective permissions (not fully possible), but helps debug
+          env | grep GITHUB
